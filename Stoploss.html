@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option Stoploss</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: #0078d7;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            display: block;
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .result p {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Option Stoploss</h1>
+    </header>
+    <main>
+        <form id="calculationForm">
+            <label for="capital">Capital:</label>
+            <input type="number" id="capital" placeholder="Enter Capital" required>
+
+            <label for="entryPrice">Entry Price:</label>
+            <input type="number" id="entryPrice" placeholder="Enter Entry Price" step="any" required>
+
+            <label for="lot">Lot:</label>
+            <input type="number" id="lot" placeholder="Enter Lot" required>
+
+            <label for="percentage">Percentage (as decimal):</label>
+            <input type="number" id="percentage" placeholder="Enter Percentage" step="any" required>
+
+            <button type="button" onclick="calculateValues()">Calculate</button>
+        </form>
+
+        <div class="result">
+            <p id="allowedBuy">Allowed Buy: </p>
+            <p id="stoploss">Stoploss: </p>
+        </div>
+    </main>
+    <script>
+        function calculateValues() {
+            const capital = parseFloat(document.getElementById('capital').value);
+            const entryPrice = parseFloat(document.getElementById('entryPrice').value);
+            const lot = parseFloat(document.getElementById('lot').value);
+            const percentage = parseFloat(document.getElementById('percentage').value);
+
+            if (!capital || !entryPrice || !lot || !percentage) {
+                alert('Please fill out all fields with valid numbers.');
+                return;
+            }
+
+            // Calculate Allowed Buy and Stoploss
+            const allowedBuy = Math.floor(capital / entryPrice); // Ensure whole value
+            const allowedBuyPerLot = Math.floor(allowedBuy / lot); // Whole value per lot
+            const stoploss = entryPrice-(entryPrice * percentage/100)  ;
+
+            // Display results
+            document.getElementById('allowedBuy').innerText = `Allowed Buy (Per Lot): ${allowedBuyPerLot}`;
+            document.getElementById('stoploss').innerText = `Stoploss: ${stoploss.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
