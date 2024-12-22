@@ -107,6 +107,12 @@
             const lot = parseFloat(document.getElementById('lot').value);
             const percentage = parseFloat(document.getElementById('percentage').value);
 
+            // Check for negative inputs
+            if (capital < 0 || entryPrice < 0 || lot < 0 || percentage < 0) {
+                alert('All input values must be positive. Please correct the inputs.');
+                return;
+            }
+
             if (!capital || !entryPrice || !lot || !percentage) {
                 alert('Please fill out all fields with valid numbers.');
                 return;
@@ -119,7 +125,7 @@
             const stoploss = entryPrice-(entryPrice * percentage/100)  ;
 
             // Display results
-            document.getElementById('allowedBuy').innerText = `Allowed Buy (Per Lot): ${allowedBuyPerLot}, Total Options Buy: ${totalAllowedBuy}`;
+            document.getElementById('allowedBuy').innerText = `Allowed Buy (Per Lot): ${allowedBuyPerLot}, Total Allowed Buy: ${totalAllowedBuy}`;
             document.getElementById('stoploss').innerText = `Stoploss: ${stoploss.toFixed(2)}`;
         }
     </script>
