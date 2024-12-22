@@ -115,10 +115,11 @@
             // Calculate Allowed Buy and Stoploss
             const allowedBuy = Math.floor(capital / entryPrice); // Ensure whole value
             const allowedBuyPerLot = Math.floor(allowedBuy / lot); // Whole value per lot
+            const totalAllowedBuy = allowedBuyPerLot * lot; // Multiply by lot
             const stoploss = entryPrice-(entryPrice * percentage/100)  ;
 
             // Display results
-            document.getElementById('allowedBuy').innerText = `Allowed Buy (Per Lot): ${allowedBuyPerLot}`;
+            document.getElementById('allowedBuy').innerText = `Allowed Buy (Per Lot): ${allowedBuyPerLot}, Total Options Buy: ${totalAllowedBuy}`;
             document.getElementById('stoploss').innerText = `Stoploss: ${stoploss.toFixed(2)}`;
         }
     </script>
