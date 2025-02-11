@@ -146,26 +146,27 @@
         }
 
         function calculateOptionValues() {
-            const totalCapital = parseFloat(document.getElementById('totalCapital').value);
-            const optionPrice = parseFloat(document.getElementById('optionPrice').value);
+    const totalCapital = parseFloat(document.getElementById('totalCapital').value);
+    const optionPrice = parseFloat(document.getElementById('optionPrice').value);
 
-            // Check for negative inputs
-            if (totalCapital < 0 || optionPrice < 0) {
-                alert('All input values must be positive. Please correct the inputs.');
-                return;
-            }
+    // Check for negative inputs
+    if (totalCapital < 0 || optionPrice < 0) {
+        alert('All input values must be positive. Please correct the inputs.');
+        return;
+    }
 
-            if (!totalCapital || !optionPrice) {
-                alert('Please fill out all fields with valid numbers.');
-                return;
-            }
+    if (!totalCapital || !optionPrice) {
+        alert('Please fill out all fields with valid numbers.');
+        return;
+    }
 
-            // Calculate Option Allowed Buy
-            const allowBuy = Math.floor(totalCapital / optionPrice); // Ensure whole value
+    // Calculate Option Allowed Buy
+    let allowBuy = Math.floor(totalCapital / optionPrice); // Ensure whole value
+    allowBuy = Math.floor(allowBuy / 75) * 75; // Round down to nearest multiple of 75
 
-            // Display results
-            document.getElementById('optionAllowedBuy').innerText = `Option Allowed Buy: ${allowBuy}`;
-        }
+    // Display results
+    document.getElementById('optionAllowedBuy').innerText = `Option Allowed Buy: ${allowBuy}`;
+}
     </script>
 </body>
 </html>
